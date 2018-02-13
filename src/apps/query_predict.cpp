@@ -44,7 +44,7 @@ int main(int argc, char** argv) {
 
   for(;;) {
     string input;
-    cout << "Enter some text: " << flush;
+    cout << "Enter some text:\n" << flush;
     if (!getline(cin, input) || input.size() == 0) break;
     // Do the prediction
     vector<Base> query_vec;
