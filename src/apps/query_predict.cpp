@@ -44,7 +44,7 @@ int main(int argc, char** argv) {
 
   for(;;) {
     string input;
-    cout << "Enter some text: ";
+    cout << "Enter some text: " << flush;
     if (!getline(cin, input) || input.size() == 0) break;
     // Do the prediction
     vector<Base> query_vec;
@@ -52,10 +52,10 @@ int main(int argc, char** argv) {
     vector<Predictions> predictions;
     sp.predictOne(query_vec, predictions);
     for (int i = 0; i < predictions.size(); i++) {
-      cout << i << "[" << predictions[i].first << "]: ";
+      cout << i << "[" << predictions[i].first << "]: " << flush;
       sp.printDoc(cout, sp.baseDocs_[predictions[i].second]);
     }
-    cout << "\n";
+    cout << "\n" << flush;
   }
 
   return 0;
