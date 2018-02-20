@@ -45,7 +45,7 @@ int main(int argc, char** argv) {
   for(;;) {
     string input;
     cout << "Enter some text:\n" << flush;
-    if (!getline(cin, input) || input.size() == 0) break;
+    if (!getline(cin, input)) break;
     // Do the prediction
     vector<Base> query_vec;
     sp.parseDoc(input, query_vec, " ");
