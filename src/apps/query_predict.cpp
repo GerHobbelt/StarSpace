@@ -21,9 +21,15 @@ int main(int argc, char** argv) {
   std::string model(argv[1]);
   args->K = atoi(argv[2]);
   args->model = model;
-  if (argc > 3) {
+
+  bool verbose = true;
+  if (argc > 3 && std::string(argv[3]) == "-quiet") {
+      verbose = false;
+  }
+
+  if (argc > 4) {
     args->fileFormat = "labelDoc";
-    args->basedoc = argv[3];
+    args->basedoc = argv[4];
   }
 
   StarSpace sp(args);
@@ -33,8 +39,10 @@ int main(int argc, char** argv) {
     sp.loadBaseDocs();
   } else {
     sp.initFromSavedModel(args->model);
-    cout << "------Loaded model args:\n";
-    args->printArgs();
+    if (verbose) {
+      cout << "------Loaded model args:\n";
+      args->printArgs();
+    }
   }
   // Set dropout probability to 0 in test case.
   sp.args_->dropoutLHS = 0.0;
@@ -42,7 +50,8 @@ int main(int argc, char** argv) {
 
   for(;;) {
     string input;
-    cout << "Enter some text: ";
+    if (verbose)
+      cout << "Enter some text: ";
     if (!getline(cin, input) || input.size() == 0) break;
     // Do the prediction
     vector<Base> query_vec;
