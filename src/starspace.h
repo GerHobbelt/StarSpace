@@ -40,9 +40,13 @@ class StarSpace {
         const std::string& sep);
 
     void nearestNeighbor(const std::string& line, int k);
+    void nearestNeighborForNN2CSV(const std::string& line, int k);
+    
 
 
     std::unordered_map<std::string, float> predictTags(const std::string& line, int k);
+    // Added this prediction function for returning the document id in trainMode 2
+    // std::unordered_map<std::string, float> predictTagsMode2(const std::string& line, int k);
     std::string printDocStr(const std::vector<Base>& tokens); 
     
     void saveModel(const std::string& filename);

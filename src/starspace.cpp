@@ -127,7 +127,7 @@ void StarSpace::initFromSavedModel(const string& filename) {
   initParser();
   initDataHandler();
 
-    loadBaseDocs();
+    // loadBaseDocs();
 }
 
 void StarSpace::initFromTsv(const string& filename) {
@@ -261,6 +261,16 @@ void StarSpace::nearestNeighbor(const string& line, int k) {
   }
 }
 
+void StarSpace::nearestNeighborForNN2CSV(const string& line, int k) {
+  auto vec = getDocVector(line, " ");
+  auto preds = model_->findLHSLike(vec, k);
+  for (auto n : preds) {
+    if (n.second > 0) {
+      cout << dict_->getSymbol(n.first) << ", ";
+    }
+  }
+}
+
 unordered_map<string, float> StarSpace::predictTags(const string& line, int k){
     args_->K = k;
     vector<Base> query_vec;
@@ -277,6 +287,23 @@ unordered_map<string, float> StarSpace::predictTags(const string& line, int k){
     }
     return umap;
 }
+
+// unordered_map<string, float> StarSpace::predictTagsMode2(const string& line, int k){
+//     args_->K = k;
+//     vector<Base> query_vec;
+//     parseDoc(line, query_vec, " ");
+
+//     vector<Predictions> predictions;
+//     predictOne(query_vec, predictions);
+
+//     unordered_map<string, float> umap;
+    
+//     for (int i = 0; i < predictions.size(); i++) {
+//       string tmp = printDocStr(predictions[i].second);
+//       umap[ tmp ] = predictions[i].first;
+//     }
+//     return umap;
+// }
 
 void StarSpace::loadBaseDocs() {
   if (args_->basedoc.empty()) {
