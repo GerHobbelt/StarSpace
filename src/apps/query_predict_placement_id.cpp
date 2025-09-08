@@ -14,7 +14,7 @@
 using namespace std;
 using namespace starspace;
 
-int main(int argc, char** argv) {
+int main(int argc, const char** argv) {
   shared_ptr<Args> args = make_shared<Args>();
   if (argc < 6) {
     cerr << "usage: " << argv[0] << " <model> k [basedoc] [basedoc_labels] #examples\n";
@@ -28,8 +28,6 @@ int main(int argc, char** argv) {
 
   const size_t SIZE = atoi(argv[5]);
 
-  // fix error C2131: expression did not evaluate to a constant
-  //string labels[SIZE];
   std::vector<string> labels;
   labels.resize(SIZE);
 
