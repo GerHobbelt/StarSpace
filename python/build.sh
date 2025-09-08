@@ -1,14 +1,14 @@
-echo "############################# initial cleanup ############################# "
-# cleanup wrapper
-rm -r build
-rm -r lib
+# echo "############################# initial cleanup ############################# "
+# # cleanup wrapper
+# rm -r build
+# rm -r lib
 
-echo "#############################  build starspace ############################# "
-# build starspace lib
-cd ..
-make clean
-make -f makefile_py
-cd -
+# echo "#############################  build starspace ############################# "
+# # build starspace lib
+# cd ..
+# make clean
+# make -f makefile_py
+# cd -
 
 echo "#############################  build wrapper ############################# "
 # build wrapper
