@@ -20,6 +20,9 @@ class InternDataHandler {
 public:
   explicit InternDataHandler(std::shared_ptr<Args> args);
 
+  // fix warning C4265: 'starspace::DataParser': class has virtual functions, but its non-trivial destructor is not virtual; instances of this class may not be destructed correctly.
+  virtual ~InternDataHandler() = default;
+
   virtual void loadFromFile(const std::string& file,
                             std::shared_ptr<DataParser> parser);
 

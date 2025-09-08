@@ -52,6 +52,9 @@ public:
     std::shared_ptr<Dictionary> dict,
     std::shared_ptr<Args> args);
 
+  // fix warning C4265: 'starspace::DataParser': class has virtual functions, but its non-trivial destructor is not virtual; instances of this class may not be destructed correctly.
+  virtual ~DataParser() = default;
+
   virtual bool parse(
       std::string& s,
       ParseResults& rslt,

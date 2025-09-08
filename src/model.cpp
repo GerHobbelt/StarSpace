@@ -174,7 +174,16 @@ Real EmbedModel::train(shared_ptr<InternDataHandler> data,
     int i = 0;
     for (auto& idx: indices) idx = i++;
   }
+
+  // fix error C2039: 'random_shuffle': is not a member of 'std'
+  // as per https://stackoverflow.com/questions/45013977/random-shuffle-is-not-a-member-of-std-error
+#if __cplusplus > 201100L
+  std::random_device rd;
+  std::mt19937 g(rd());
+  std::shuffle(indices.begin(), indices.end(), g);
+#else
   std::random_shuffle(indices.begin(), indices.end());
+#endif
 
   // Compute word negatives
   if (args_->trainMode == 5 || args_->trainWord) {

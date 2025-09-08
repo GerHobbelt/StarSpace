@@ -18,7 +18,7 @@
 #include <fstream>
 #include <boost/noncopyable.hpp>
 #include <vector>
-
+#include <chrono>
 
 namespace starspace {
 
