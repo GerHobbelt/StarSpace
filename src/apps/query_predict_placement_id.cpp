@@ -28,7 +28,10 @@ int main(int argc, char** argv) {
 
   const size_t SIZE = atoi(argv[5]);
 
-  string labels[SIZE];
+  // fix error C2131: expression did not evaluate to a constant
+  //string labels[SIZE];
+  std::vector<string> labels;
+  labels.resize(SIZE);
 
   ifstream labels_file(argv[4]);
 
