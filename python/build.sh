@@ -16,8 +16,11 @@ mkdir lib
 cp ../libstarspace.a ./lib
 mkdir build
 cd build
+echo "Conan install"
 conan install ..
-cmake .. -DCMAKE_BUILD_TYPE=Release
+echo "cmake .."
+cmake .. -DCMAKE_BUILD_TYPE=Release -DPYTHON_LIBRARY=/Users/magdiel/miniconda3/envs/python36/lib/libpython3.6m.dylib -DPYTHON_INCLUDE_DIR=/Users/magdiel/miniconda3/envs/python36/include/python3.6m/
+echo "cmake build"
 cmake --build .
 cd -
 

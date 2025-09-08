@@ -387,6 +387,38 @@ Sometimes it is useful to print out sentence / document embeddings from a traine
     
 where "\<model\>" specifies a trained StarSpace model. If filename is provided, it reads each sentence / document from file, line by line, and outputs vector embeddings accordingly. If the filename is not provided, it reads each sentence / document from stdin.
 
+## Added utility Functions
+
+Modified a few utility functions for StarSpace to work with our own purposes:
+
+### ***(MODIFIED)*** Show Predictions for Queries returning the placement ID
+
+When using trainMode 2, basedocs must be provided. Original code ranked documents (lines) from basedocs with the selected model but this version return a label from a second file instead. In other words, one can feed in normal basedocs and expect a related output mapped from matching the lines of basedocs with lines of a labels file. To build and use this utility function, run the following commands:
+
+    make query_predict_placement_id
+    ./query_predict_placement_id <model> k [basedoc] [basedoc_labels] #examples
+    
+where "\<model\>" specifies a trained StarSpace model and the optional K specifies how many of the top predictions to show (top ranked first). "basedocs" points to the file of documents to rank, see also the argument of the same name in the starspace main above. In our usecase, every line is the description of a placement. "basedoc_labels" contains a label for each document in basedocs (matching by line number) so that at printing the predictions we could get a desired label from a ranked document (our use case was to retrieve placement ID instead of StarSpace preprocessed basedoc line)
+
+After loading the model, it reads a line of entities (can be either a single word or a sentence / document), and outputs the predictions.
+
+### ***(MODIFIED)*** Save Predictions for Queries to a file
+
+Modified query_predict to have a more useful format to save the predictions to a file. To build and use this utility function, run the following commands:
+
+    make query_predict_id_to_file
+    ./query_predict_id_to_file <model> k [basedoc] < [input] > [output]
+    
+where "\<model\>" specifies a trained StarSpace model and the optional K specifies how many of the top predictions to show (top ranked first). "basedocs" points to the file of documents to rank, see also the argument of the same name in the starspace main above. If "basedocs" is not provided, the labels in the dictionary are used instead. "input" would be a .txt file containing queries desired in each line and "ouptut" will end up containing some unuseful printing from the model loading part (can be deleted later) and then a the set of k predictions for each line in the "input" file separated by an `__end__` between each bunch of predictions.
+
+### ***(MODIFIED)*** Nearest Neighbor Queries for Related Keywords Extraction
+
+To get a list of NNs for a set of words (in our use case, Jobtitles) and save them to a csv file. To build and use this utility function, run the following commands:
+
+    make query_nn_to_csv
+    ./query_nn_to_csv <model> [k] < [input] > [output]
+    
+where "\<model\>" specifies a trained StarSpace model and the optional K (default value is 5) specifies how many nearest neighbors to search for. The "input" file would be a .txt file where every line is an input to look for their NNs. The "output" file should be a .csv that will contain some unnecessary printings from model loading (should be later deleted) and the csv table format with two columns, the first one is the original look up word and the second one has the k NNs separated by commas.
 
 ## Citation
 
