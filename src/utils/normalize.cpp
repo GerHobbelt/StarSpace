@@ -34,7 +34,7 @@ void normalize_text(std::string& str) {
 
   for (char c: str) {
     assert(c); // don't shove binary data through this.
-    containsDigits |= isdigit(c);
+    containsDigits |= !!isdigit(c);
     if (!isascii(c)) {
       allNumeric = false;
       continue;
