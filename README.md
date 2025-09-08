@@ -44,7 +44,7 @@ Optional: if one wishes to run the unit tests in src directory, <a href=https://
 
 In order to build StarSpace on Mac OS or Linux, use the following:
 
-    git clone https://github.com/facebookresearch/Starspace.git
+    git clone https://github.com/ampaho/StarSpace.git
     cd Starspace
     make
 
