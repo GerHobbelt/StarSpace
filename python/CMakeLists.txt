@@ -4,7 +4,7 @@ project(starspace)
 
 
 include(${CMAKE_BINARY_DIR}/conanbuildinfo.cmake)
-include_directories(SYSTEM ${CONAN_INCLUDE_DIRS} ../src ../src/utils /usr/local/bin/boost_1_63_0/)
+include_directories(SYSTEM ${CONAN_INCLUDE_DIRS} ../src ../src/utils /usr/local/bin/boost_1_63_0/ /usr/local/include)
 link_directories(${CMAKE_BINARY_DIR}/../lib)
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR})
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY_RELEASE ${CMAKE_RUNTIME_OUTPUT_DIRECTORY})
@@ -76,6 +76,7 @@ include_directories(${PROJECT_SOURCE_DIR}/pybind11/include)
 # Create the binding library
 add_library(starwrap SHARED
   starspace_pybind.cc
+  starspace_pythonic.cc
   # ... extra files go here ...
 )
 

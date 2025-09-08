@@ -1,0 +1,50 @@
+no labels ( see example of labels in tagged post txt )
+see how it's done in input.txt 
+and then user test will just be a passed in string of ingredients tab spaced i believe
+MAYBE in rows like meals but not sure all that can be tested against...
+
+--
+
+So are the meal embeddings alone important?
+Or should we just only embed the ones that have been swiped like the content-based recommendation part of the paper suggest?
+
+just test results for both I suppose.
+
+--
+
+--
+**If we go pure menu embedding it looks like this, where each row is a meal** (for these cleaning steps, did it all in excel)
+
+driedpasta milk shreddedcheddarcheese salt dijonmustard
+jumboshrimp oliveoil butter mincedgarlic lemonjuice lemonzest seasalt
+
+
+
+og files looked like: 
+['jalapeno chilies', 'lemon', 'dried oregano', 'olive oil', 'garlic', 'boneless skinless chicken breasts']
+['boneless center cut pork chops', 'salt', 'ground black pepper', 'olive oil', 'balsamic vinegar', 'sugar']
+['ground chicken', 'avocado', 'chopped garlic', 'panko', 'jalapeno chilies', 'salt', 'pepper']
+['steak', 'eggs', 'buttermilk', 'flour', 'vegetable oil', 'whole milk', 'pan drippings']
+['ground beef', 'eggs', 'salt', 'ground black pepper', 'seasoned bread crumbs', 'worcestershire sauce'] 
+
+--
+**If we go pure user embedding based on swipes it looks like this, where each row is a user**
+This one seems more in line with the content based recs of the paper 
+But less in line with Jack suggestions and seems like it severely limits the amount of info you use to start 
+(in fairness, while this one is harder to bootstrap, if it works better, that's a good thing for building a moat)
+
+user1  ingredient1meal1 ingredient2meal1 <tab> ingredient1meal2 ingredient2meal2
+user2 
+
+--
+
+Do the meal split, versus the full ingredient bag of words for the user? Just try all of these and see what the results are.
+** Note that you'll need to restore the database backup to split out to meals again because I aggregated for users.
+
+
+--
+
+Or just use the current agg I have for user: 
+
+user1 ingredient1 ingredient2 ... (no meal splits)
+user2 ingredient1 ingredient2 ... 
