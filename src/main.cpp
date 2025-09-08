@@ -12,7 +12,13 @@
 using namespace std;
 using namespace starspace;
 
-int main(int argc, char** argv) {
+
+#if defined(BUILD_MONOLITHIC)
+#define main starspace_engine_main
+#endif
+
+extern "C"
+int main(int argc, const char** argv) {
   shared_ptr<Args> args = make_shared<Args>();
   args->parseArgs(argc, argv);
   args->printArgs();

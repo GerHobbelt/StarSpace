@@ -14,7 +14,7 @@ using namespace starspace;
 
 // Read each sentence / document line by line,
 // and output it's embedding vector
-void embedDoc(StarSpace& sp, istream& fin) {
+static void embedDoc(StarSpace& sp, istream& fin) {
   string input;
   while (getline(fin, input)) {
     if (input.size() ==0) break;
@@ -25,7 +25,12 @@ void embedDoc(StarSpace& sp, istream& fin) {
   }
 }
 
-int main(int argc, char** argv) {
+#if defined(BUILD_MONOLITHIC)
+#define main starspace_embed_doc_app_main
+#endif
+
+extern "C"
+int main(int argc, const char** argv) {
   shared_ptr<Args> args = make_shared<Args>();
 
   if (argc < 2) {

@@ -68,7 +68,7 @@ bool Args::isTrue(string arg) {
   return (arg == "true" || arg == "1");
 }
 
-void Args::parseArgs(int argc, char** argv) {
+void Args::parseArgs(int argc, const char** argv) {
   if (argc <= 1) {
     cerr << "Usage: need to specify whether it is train or test.\n";
     printHelp();

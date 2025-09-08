@@ -39,10 +39,15 @@ TEST(Proj, empty) {
   });
 }
 
+#if defined(BUILD_MONOLITHIC)
+#define main starspace_proj_test_main
+#endif
+
 /**
 * @brief  Main entry-point for this application, for the case of
 *  running this test project standalone.
 */
+extern "C"
 int main(int argc, const char** argv) {
   ::testing::InitGoogleTest(&argc, argv);
   return RUN_ALL_TESTS();

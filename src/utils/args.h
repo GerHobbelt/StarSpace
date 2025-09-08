@@ -66,7 +66,7 @@ class Args {
     bool trainWord;
     bool excludeLHS;
 
-    void parseArgs(int, char**);
+    void parseArgs(int, const char**);
     void printHelp();
     void printArgs();
     void save(std::ostream& out);

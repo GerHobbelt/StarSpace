@@ -14,6 +14,12 @@
 using namespace std;
 using namespace starspace;
 
+
+#if defined(BUILD_MONOLITHIC)
+#define main starspace_predict_placement_id_app_main
+#endif
+
+extern "C"
 int main(int argc, const char** argv) {
   shared_ptr<Args> args = make_shared<Args>();
   if (argc < 6) {
