@@ -21,28 +21,37 @@ int main(int argc, char** argv) {
   std::string model(argv[1]);
   args->K = atoi(argv[2]);
   args->model = model;
-  if (argc > 3) {
+
+  bool verbose = true;
+  if (argc > 3 && std::string(argv[3]) == "-quiet") {
+      verbose = false;
+  }
+
+  if (argc > 4) {
     args->fileFormat = "labelDoc";
-    args->basedoc = argv[3];
+    args->basedoc = argv[4];
   }
 
   StarSpace sp(args);
   if (boost::algorithm::ends_with(args->model, ".tsv")) {
     sp.initFromTsv(args->model);
+    // Load basedocs which are set of possible things to predict.
+    sp.loadBaseDocs();
   } else {
     sp.initFromSavedModel(args->model);
-    cout << "------Loaded model args:\n";
-    args->printArgs();
+    if (verbose) {
+      cout << "------Loaded model args:\n";
+      args->printArgs();
+    }
   }
   // Set dropout probability to 0 in test case.
   sp.args_->dropoutLHS = 0.0;
   sp.args_->dropoutRHS = 0.0;
-  // Load basedocs which are set of possible things to predict.
-  sp.loadBaseDocs();
 
   for(;;) {
     string input;
-    cout << "Enter some text:\n" << flush;
+    if (verbose)
+      cout << "Enter some text:\n" << flush;
     if (!getline(cin, input)) break;
     // Do the prediction
     vector<Base> query_vec;
